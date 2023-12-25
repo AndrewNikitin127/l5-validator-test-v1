@@ -8,5 +8,9 @@ export default class ArraySchema {
   isValid(val){
     return this.validators.every((validator) => validator(val));
   }
-
+  length(num){
+    const lengthValidator = (array) => array.length === num;
+    this.validators.push(lengthValidator);
+    return new ArraySchema([...this.validators, lengthValidator]);
+  }
 }
